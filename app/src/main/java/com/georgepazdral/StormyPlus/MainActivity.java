@@ -2,7 +2,9 @@ package com.georgepazdral.StormyPlus;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.location.Address;
 import android.location.Criteria;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
@@ -27,6 +29,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.Locale;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -67,6 +71,26 @@ public class MainActivity extends ActionBarActivity {
         final double longitude = location.getLongitude();
         //final double latitude = 37.8267;
         //final double longitude = -122.423;
+
+
+        Geocoder geoCoder = new Geocoder(this, Locale.getDefault());
+        StringBuilder builder = new StringBuilder();
+        try {
+            List<Address> address = geoCoder.getFromLocation(latitude, longitude, 1);
+            String maxLines = address.get(0).getLocality();
+            String State = address.get(0).getAdminArea();
+            String cas = maxLines + ", " + State;
+                builder.append(cas);
+                builder.append(" ");
+            } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+
+        String fnialAddress = builder.toString(); //This is the complete address.
+            mlocationLabel.setText(fnialAddress);
+
+
+
 
         mRefreshImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -157,7 +181,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void updateDisplay() {
-        mlocationLabel.setText(mCurrentWeather.getTimeZone());
+        //mlocationLabel.setText(mCurrentWeather.getTimeZone());
         mTemperatureLabel.setText(mCurrentWeather.getTemperature() + "");
         mTimeLabel.setText("At " + mCurrentWeather.getFormattedTime() + " it will be");
         mHumidityValue.setText(mCurrentWeather.getHumidity() + "");

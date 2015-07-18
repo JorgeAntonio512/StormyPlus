@@ -147,14 +147,4 @@
         android:layout_centerHorizontal="true"
         android:layout_alignBottom="@+id/refreshImageView"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Although your time zone is being displayed, all information is being derived from your exact location"
-        android:id="@+id/textView"
-        android:layout_above="@+id/timeLabel"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:textColor="@android:color/white"/>
-
 </RelativeLayout>
