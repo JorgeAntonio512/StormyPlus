@@ -1,4 +1,4 @@
-package com.georgepazdral.StormyPlus;
+package com.georgepazdral.StormyPlus.ui;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
